@@ -8,10 +8,11 @@ class App extends Component {
       <div className="App">
         <h1>Hello, I'm a Reactive application!!!</h1>   
         <p>This is really working...</p>
-        <Person />
+        <Person name='Steven' age='22'/>
+        <Person name='Kevin' age='23'/>
+        <Person name='Bob' age='25'/>
       </div>
     );
-    return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Im a rect app'));
   }
 }
 
