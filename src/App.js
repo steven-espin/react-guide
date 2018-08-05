@@ -11,7 +11,7 @@ class App extends Component {
     ]
   }
 
-  swtchNameHandler = () => {
+  swtchNameHandler = (newName) => {
     console.log("clicked...");
     // This won't work to change state: this.state.persons[0].name = 'Max';
     // setState function required to refresh DOM once state is changed.
@@ -19,9 +19,19 @@ class App extends Component {
   
     this.setState( {
       persons: [
-        { name: 'Max', age: '27' },
+        { name: newName, age: '27' },
         { name: 'Kevin', age: '27' },
         { name: 'Bobby', age: '27' }
+      ]
+    } )
+  }
+
+  nameChangedHandler = (event) => {
+    this.setState( {
+      persons: [
+        { name: event.target.value, age: '27' },
+        { name: 'Kevin', age: '23' },
+        { name: 'Bobby', age: '25' }
       ]
     } )
   }
@@ -31,10 +41,19 @@ class App extends Component {
       <div className="App">
         <h1>Hello, I'm a Reactive application!!!</h1>   
         <p>This is really working...</p>
-        <button onClick={this.swtchNameHandler}>Switch Name</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>my hobbies: motorcycling</Person>
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age}/>
+        <button onClick={this.swtchNameHandler.bind(this, 'Macho')}>Switch Name</button>
+        <Person 
+        name={this.state.persons[0].name} 
+        age={this.state.persons[0].age}
+        click={this.swtchNameHandler.bind(this, 'Nacho')}
+        changed={this.nameChangedHandler}/>
+        <Person 
+        name={this.state.persons[1].name} 
+        age={this.state.persons[1].age}
+        click={this.swtchNameHandler.bind(this, 'Honcho')}>my hobbies: motorcycling</Person>
+        <Person 
+        name={this.state.persons[2].name} 
+        age={this.state.persons[2].age}/>
       </div>
     );
   }
