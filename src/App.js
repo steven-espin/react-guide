@@ -37,11 +37,19 @@ class App extends Component {
   }
 
   render() {
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue', 
+      padding: '8px',
+      cursor: 'pointer'
+    };
+
     return (
       <div className="App">
         <h1>Hello, I'm a Reactive application!!!</h1>   
         <p>This is really working...</p>
-        <button onClick={this.swtchNameHandler.bind(this, 'Macho')}>Switch Name</button>
+        <button onClick={this.swtchNameHandler.bind(this, 'Macho')} style={style}>Switch Name</button>
         <Person 
         name={this.state.persons[0].name} 
         age={this.state.persons[0].age}
