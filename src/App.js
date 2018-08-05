@@ -8,7 +8,8 @@ class App extends Component {
       { name: 'Steven', age: '22' },
       { name: 'Kevin', age: '23' },
       { name: 'Bob', age: '25' }
-    ]
+    ], 
+    showPersons: false
   }
 
   swtchNameHandler = (newName) => {
@@ -36,6 +37,11 @@ class App extends Component {
     } )
   }
 
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
+  }
+
   render() {
     const style = {
       backgroundColor: 'white',
@@ -45,23 +51,33 @@ class App extends Component {
       cursor: 'pointer'
     };
 
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+            <Person 
+            name={this.state.persons[0].name} 
+            age={this.state.persons[0].age}
+            click={this.swtchNameHandler.bind(this, 'Nacho')}
+            changed={this.nameChangedHandler}/>
+            <Person 
+            name={this.state.persons[1].name} 
+            age={this.state.persons[1].age}
+            click={this.swtchNameHandler.bind(this, 'Honcho')}>my hobbies: motorcycling</Person>
+            <Person 
+            name={this.state.persons[2].name} 
+            age={this.state.persons[2].age}/>
+          </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>Hello, I'm a Reactive application!!!</h1>   
         <p>This is really working...</p>
-        <button onClick={this.swtchNameHandler.bind(this, 'Macho')} style={style}>Switch Name</button>
-        <Person 
-        name={this.state.persons[0].name} 
-        age={this.state.persons[0].age}
-        click={this.swtchNameHandler.bind(this, 'Nacho')}
-        changed={this.nameChangedHandler}/>
-        <Person 
-        name={this.state.persons[1].name} 
-        age={this.state.persons[1].age}
-        click={this.swtchNameHandler.bind(this, 'Honcho')}>my hobbies: motorcycling</Person>
-        <Person 
-        name={this.state.persons[2].name} 
-        age={this.state.persons[2].age}/>
+        <button onClick={this.togglePersonsHandler} style={style}>Toggle Persons</button> 
+        {persons}
       </div>
     );
   }
