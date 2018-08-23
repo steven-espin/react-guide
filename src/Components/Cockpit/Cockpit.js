@@ -17,7 +17,7 @@ const Cockpit = (props) => {
 
     return (
         <div className={classes.Cockpit}>
-            <h1>Hello, I'm a Reactive application!!!</h1>   
+            <h1>{props.appTitle}</h1>   
             <p className={assignedClasses.join(' ')}>This is really working...</p>
             <button className={btnClass} onClick={props.clicked}>Toggle Persons</button> 
         </div>
