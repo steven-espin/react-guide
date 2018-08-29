@@ -15,6 +15,24 @@ class Persons extends Component  {
         console.log("[Persons.js] : componentDidMount()")
       }
 
+      componentWillReceiveProps(newProps) {
+        console.log("[Persons.js] : componentWillReceiveProps()", newProps);
+      }
+
+      shouldComponentUpdate(newProps, newState) {
+        console.log("[Persons.js] : shouldComponentUpdate()", newProps, newState);
+        return newProps.persons !== this.props.persons || newProps.clicked !== this.props.clicked || 
+            newProps.changed !== this.props.changed; 
+      }
+
+      componentWillUpdate(newProps, newState) {
+        console.log("[Persons.js] : componentWillUpdate()", newProps, newState);
+      }
+
+      componentDidUpdate() {
+        console.log("[Persons.js] : componentDidUpdate()");
+      }
+
     render() {
         console.log("[Persons.js] : render()")
         return this.props.persons.map((person, index) => {
