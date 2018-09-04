@@ -1,20 +1,18 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classes from './App.css';
 import Persons from '../Components/Persons/Persons';
 import Cockpit from '../Components/Cockpit/Cockpit';
+import withClass from "../hoc/withClass";
+import auxComponent from "../hoc/auxcomponent";
 
-class App extends Component {
+class App extends PureComponent {
   constructor (props) {
     super(props);
     console.log("[App.js] : constructor()", props);
   }
 
-  componentWillMount() {
-    console.log("[App.js] : componentWillMount()");
-  }
-
-  componentDidMount() {
-    console.log("[App.js] : componentDidMount()")
+  componentDidUpdate() {
+    console.log("App.js : updated");
   }
 
   state = {
@@ -67,16 +65,15 @@ class App extends Component {
     }
 
     return (
-      <div className={classes.App}>
-        <button onClick={() => {this.setState({showPersons: true})}}>show Persons only</button>
+      <auxComponent>
         <Cockpit appTitle={this.props.title} 
           showPersons={this.state.showPersons} 
           persons={this.state.persons}
           clicked={this.togglePersonsHandler}/>
         {persons}
-      </div>
+      </auxComponent>
     );
   }
 }
 
-export default App;
+export default withClass(App, classes.App);
