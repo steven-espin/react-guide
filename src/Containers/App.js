@@ -3,7 +3,7 @@ import classes from './App.css';
 import Persons from '../Components/Persons/Persons';
 import Cockpit from '../Components/Cockpit/Cockpit';
 import withClass from "../hoc/withClass";
-import auxComponent from "../hoc/auxcomponent";
+import Auxcomponent from "../hoc/auxcomponent";
 
 class App extends PureComponent {
   constructor (props) {
@@ -17,11 +17,12 @@ class App extends PureComponent {
 
   state = {
     persons: [
-      { id: '01', name: 'Steven', age: '22' },
-      { id: '02', name: 'Kevin', age: '23' },
-      { id: '03', name: 'Bob', age: '25' }
+      { id: '01', name: 'Steven', age: 22 },
+      { id: '02', name: 'Kevin', age: 23 },
+      { id: '03', name: 'Bob', age: 25 }
     ], 
-    showPersons: false
+    showPersons: false, 
+    toggleClicked: 0
   }
 
   deletePersonHandler = (personIndex) => {
@@ -49,7 +50,12 @@ class App extends PureComponent {
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({showPersons: !doesShow});
+    this.setState((prevState, props) => { //use prevState if setState depends on value in state
+      return {
+        showPersons: !doesShow, 
+        toggleClicked: prevState.toggleClicked + 1
+      }}
+    );
   }
 
   render() {
@@ -65,13 +71,13 @@ class App extends PureComponent {
     }
 
     return (
-      <auxComponent>
+      <Auxcomponent>
         <Cockpit appTitle={this.props.title} 
           showPersons={this.state.showPersons} 
           persons={this.state.persons}
           clicked={this.togglePersonsHandler}/>
         {persons}
-      </auxComponent>
+      </Auxcomponent>
     );
   }
 }
